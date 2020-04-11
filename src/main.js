@@ -5,6 +5,7 @@ import Loader from './components/app/Loader';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+import tooltipDirective from './directives/tooltip.directive';
 import dateFilter from './filters/date.filters';
 import currencyFilter from './filters/currency.filter';
 import messagePlugin from './utils/message.plugin';
@@ -20,6 +21,7 @@ Vue.use(messagePlugin);
 Vue.use(Vuelidate);
 Vue.filter('date', dateFilter);
 Vue.filter('currency', currencyFilter);
+Vue.directive('tooltip', tooltipDirective);
 Vue.component('Loader', Loader);
 
 firebase.initializeApp({
