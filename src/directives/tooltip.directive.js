@@ -1,6 +1,10 @@
+import localizeFilter from '@/filters/localize.filter';
+
 export default {
-  bind (el, { value }) {
-    window.M.Tooltip.init(el, { html: value });
+  bind (el, { value, modifiers }) {
+    window.M.Tooltip.init(el, {
+      html: modifiers.noloc ? value : localizeFilter(value)
+    });
   },
 
   unbind (el) {

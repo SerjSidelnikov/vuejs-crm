@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Редактировать</h4>
+        <h4>{{'Edit'|localize}}</h4>
       </div>
 
       <form @submit.prevent="handleSubmit">
@@ -14,7 +14,7 @@
               :value="c.id"
             >{{c.title}}</option>
           </select>
-          <label>Выберите категорию</label>
+          <label>{{'SelectCategory'|localize}}</label>
         </div>
 
         <div class="input-field">
@@ -24,11 +24,11 @@
             v-model="title"
             :class="{invalid: $v.title.$dirty && !$v.title.required}"
           >
-          <label for="name">Название</label>
+          <label for="name">{{'Title'|localize}}</label>
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
-          >Введите название категории</span>
+          >{{'Message_CategoryTitle'|localize}}</span>
         </div>
 
         <div class="input-field">
@@ -38,15 +38,15 @@
             v-model.number="limit"
             :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
           >
-          <label for="limit">Лимит</label>
+          <label for="limit">{{'Limit'|localize}}</label>
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
-          >Минимальная величина {{$v.limit.$params.minValue.min}}</span>
+          >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Обновить
+          {{'Update'|localize}}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -56,6 +56,7 @@
 
 <script>
 import { minValue, required } from 'vuelidate/lib/validators';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   props: {
@@ -107,7 +108,7 @@ export default {
         };
 
         await this.$store.dispatch('updateCategory', categoryData);
-        this.$message('Категория успешно обновлена');
+        this.$message(localizeFilter('Category_HasBeenUpdated'));
         this.$emit('update', categoryData);
       } catch (e) {}
     }

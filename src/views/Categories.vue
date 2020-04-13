@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>{{'Categories'|localize}}</h3>
     </div>
 
     <section>
@@ -16,7 +16,7 @@
           :key="categories.length + updateCount"
           @update="updateCategories"
         />
-        <p v-else class="center">Категорий нет</p>
+        <p v-else class="center">{{'NoCategories'|localize}}</p>
       </div>
     </section>
   </div>
@@ -25,9 +25,17 @@
 <script>
 import CategoryCreate from '@/components/CategoryCreate';
 import CategoryEdit from '@/components/CategoryEdit';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'categories',
+
+  metaInfo () {
+    return {
+      title: localizeFilter('Menu_Categories')
+    };
+  },
+
   data: () => ({
     categories: [],
     loading: true,
